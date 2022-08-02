@@ -1,5 +1,17 @@
 # -*- coding: utf-8 -*-
-"""
+""" Get test data about Abalone shells
+
+Abalone shell data comes from the UCI Machine Learning Repository: https://archive.ics.uci.edu/ml/datasets/abalone
+
+Detailed information can be found in the link.
+
+Target variable: Rings
+
+References:
+Dua, D. and Graff, C. (2019). UCI Machine Learning Repository. Available at: http://archive.ics.uci.edu/ml
+
+Warwick J Nash, Tracy L Sellers, Simon R Talbot, Andrew J Cawthorn and Wes B Ford (1994). "The Population Biology of Abalone (_Haliotis_ species) in Tasmania. I. Blacklip Abalone (_H. rubra_) from the North Coast and Islands of Bass Strait", Sea Fisheries Division, Technical Report No. 48 (ISSN 1034-3288)
+
 Created on Sun Sep 26 16:16:25 2021
 
 @author: Joseph Huard
@@ -8,6 +20,7 @@ Created on Sun Sep 26 16:16:25 2021
 import pandas as pd
 import pathlib as plib
 
+### META DATA
 HEADER_NAMES = [    # Specific header names for abalone data set
     'sex',
     'length',
@@ -19,6 +32,8 @@ HEADER_NAMES = [    # Specific header names for abalone data set
     'shell_weight',
     'rings'
 ]
+
+
 
 def get_self_path() -> plib.WindowsPath:
 
@@ -73,5 +88,25 @@ def default_data_cleanse(df: pd.DataFrame) -> pd.DataFrame:
 
 
 if __name__ == "__main__":
+
+    # Check for command line arguments
+    import argparse as ap
+    parser = ap.ArgumentParser(description = "Loads data about abalone shells. Originally sourced from: https://archive.ics.uci.edu/ml/datasets/abalone \nTarget feature: rings.")
+    parser.add_argument(
+        '--clean', 
+        dest = 'cleanup', 
+        action = 'store_const',
+        const = True,
+        default = False,
+        help = "Data will have default cleaning process applied to it."
+    )
+
+    args = parser.parse_args(args = [])
     
-    df = get_data()
+    df = get_data() # load data
+
+    # clean data if --clean argument was passed through command line.
+    if args.cleanup:
+        df = default_data_cleanse(df)
+    
+    print(df)
