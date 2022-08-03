@@ -5,7 +5,7 @@ Abalone shell data comes from the UCI Machine Learning Repository: https://archi
 
 Detailed information can be found in the link.
 
-Target variable: Rings
+Recommended target variable: rings [int]
 
 References:
 Dua, D. and Graff, C. (2019). UCI Machine Learning Repository. Available at: http://archive.ics.uci.edu/ml
@@ -21,6 +21,10 @@ import pandas as pd
 import pathlib as plib
 
 ### META DATA
+FILE_NAME = 'abalone' # Current File name goes here
+DATA_ORIGIN_LINK = 'https://archive.ics.uci.edu/ml/datasets/abalone' # Where the data comes from goes here
+TARGET_FEATURE = 'rings' # Recommended target feature goes here
+
 HEADER_NAMES = [    # Specific header names for abalone data set
     'sex',
     'length',
@@ -43,7 +47,7 @@ def get_self_path() -> plib.WindowsPath:
 
     # checking if the function has been imported or called within the file
     if __name__ == "__main__":
-        return plib.Path('abalone.py').absolute()
+        return plib.Path(f'{FILE_NAME}.py').absolute()
     
     return plib.Path(__file__).absolute()
 
@@ -91,7 +95,7 @@ if __name__ == "__main__":
 
     # Check for command line arguments
     import argparse as ap
-    parser = ap.ArgumentParser(description = "Loads data about abalone shells. Originally sourced from: https://archive.ics.uci.edu/ml/datasets/abalone \nTarget feature: rings.")
+    parser = ap.ArgumentParser(description = f"Loads data about {FILE_NAME} shells. Originally sourced from: {DATA_ORIGIN_LINK} \nRecommended target feature: {TARGET_FEATURE}.")
     parser.add_argument(
         '--clean', 
         dest = 'cleanup', 
