@@ -13,3 +13,4 @@ The following is a table scripts, with a brief description of the data included,
 
 | Script  | Description | Target Variable | Link  |
 | ------- | ------- | ------- | ------- |
+| abalone.py  | Dataset recording measurements of Abalone shells. | rings (int) | [Available at UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/abalone) |
